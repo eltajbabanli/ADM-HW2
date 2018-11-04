@@ -2,9 +2,9 @@ import pandas
 from collections import defaultdict
 import scipy.special
 
-#This function read the file zone lookup and return a dictonary with as entry the name of the boroughs and as values a list with the IDs of the associated zones
+#This function read the file zone lookup and return a dictonary with as entrys the names of the boroughs and as values a list with the IDs of the associated zones
 def boroughsIdentifyer():
-    #We load the lookup tables with the name of the zone and the rispective codes
+    #We load the lookup tables with the names of the zones and the rispective codes
     zones = pandas.read_csv('taxi _zone_lookup.csv',sep=',', encoding='ISO-8859-1')
     
     boroughs = defaultdict(list)
@@ -28,7 +28,7 @@ def payment_category(boroughs):
     #and the dictonary to be filled
     payments_method = {borough:{method: 0 for method in methods} for borough in boroughs.keys()}
 
-    #We create a list with the month number we are interested in
+    #We create a list with the month numbers we are interested in
     months = ['0'+str(i) for i in range(1,7)]
     for month in months:
         
