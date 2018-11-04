@@ -1,9 +1,9 @@
 import pandas
 from collections import defaultdict
 
-#This function read the file zone lookup and return a dictonary with as entry the name of the boroughs and as values a list with the IDs of the associated zones
+#This function read the file zone lookup and return a dictonary with as entrys the name of the boroughs and as values a list with the IDs of the associated zones
 def boroughsIdentifyer():
-    #We load the lookup tables with the name of the zone and the rispective codes
+    #We load the lookup tables with the name of the zones and the rispective codes
     zones = pandas.read_csv('taxi _zone_lookup.csv',sep=',', encoding='ISO-8859-1')
     
     boroughs = defaultdict(list)
@@ -18,9 +18,9 @@ def boroughsIdentifyer():
     #We return it
     return dict(boroughs)
 
-#This function take the list of the boroughs and creates a dictonary and a data frame contaning the number of ride for time slot both for the whole city and for each single neigborhood
+#This function take the list of the boroughs and creates a dictonary and a data frame contaning the number of ride for time slot both for the whole city and for each single borough
 def time_slotter(boroughs):
-    #We create dictonarys with as keys different time ranges that we will use to count the rides starting in these time zones
+    #We create dictonarys with as keys different time slots that we will use to count the rides starting in these time slots
     time_slots_boroughs = {name:{'6-10':0, '10-12':0,'12-15':0,'15-17':0,'17-22':0,'22-6':0} for name in boroughs.keys()}
     
     time_slots = {'6-10':0, '10-12':0,'12-15':0,'15-17':0,'17-22':0,'22-6':0}
