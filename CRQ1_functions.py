@@ -41,12 +41,10 @@ def price_calculator(boroughs):
     for month in months:
         
         #We load the file
-        taxi = pandas.read_csv('yellow_tripdata_2018-'+month+'.csv',sep=',', encoding='ISO-8859-1')
+        taxi = pandas.read_csv('cleaned_yellow_tripdata_2018-'+month+'.csv',sep=',', encoding='ISO-8859-1')
 
         #We delete the wrong columns, add the value we need and filter them eliminating odd results. Then we delete all the others columns
         taxi = calculate_trip_duration(taxi)
-        taxi = taxi[(taxi['trip_distance']*taxi['duration']) != 0]
-        taxi = taxi[list(map(lambda x: x[2:7] == '18-'+month, taxi["tpep_pickup_datetime"].values))]
         taxi['P'] = taxi['fare_amount']/taxi['trip_distance']
         taxi = taxi[taxi['P']<15]
         taxi = taxi[0<taxi['P']]
@@ -62,7 +60,7 @@ def price_calculator(boroughs):
 def mean_and_std(df_dict,boroughs):
     #We compute the mean and standard deviation using the dedicated pandas function
     means = pandas.DataFrame({borough:df_dict[borough].mean() for borough in boroughs})
-    stds = pandas.DataFrame({borough:df_dict[borough].std() for borough in boroughs})
+    stds = pandas.DataFrame({borough:df_dict[borough].std(ddof = 0) for borough in boroughs})
     
     #We reorganize our values in some convenient data frame
     Pdf = pandas.DataFrame()
